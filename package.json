@@ -13,6 +13,6 @@
   "devDependencies": {
     "ava": "^6.0.1",
     "benchmark": "^2.1.4",
-    "pako": "^2.1.0"
+    "pako": "^3.0.3"
   }
 }
