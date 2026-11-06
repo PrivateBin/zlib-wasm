@@ -1,6 +1,6 @@
 import Benchmark from 'benchmark';
 import fs from 'fs';
-import pako from 'pako';
+import { deflateRaw, inflateRaw } from 'pako';
 
 import zlibSampleInit from '../src/index.js';
 import zlib from 'zlib';
@@ -14,7 +14,7 @@ import zlib from 'zlib';
   // warmup
   myZlib.deflate(source);
   zlib.deflateRawSync(source, { chunkSize, level });
-  pako.deflateRaw(source, { chunkSize, level });
+  deflateRaw(source, { chunkSize, level });
 
   // run
   console.log(`## lorem_1mb.txt size: ${source.length}`);
@@ -26,7 +26,7 @@ import zlib from 'zlib';
       fn: () => myZlib.deflate(source),
     })
     .add('pako', {
-      fn: () => pako.deflateRaw(source, { chunkSize, level }),
+      fn: () => deflateRaw(source, { chunkSize, level }),
     })
     .add('native', {
       fn: () => zlib.deflateRawSync(source, { chunkSize, level }),
@@ -42,7 +42,7 @@ import zlib from 'zlib';
   // warmup
   const deflated = zlib.deflateRawSync(source, { level: 6 });
   myZlib.inflate(deflated);
-  pako.inflateRaw(deflated, { chunkSize });
+  inflateRaw(deflated, { chunkSize });
   zlib.inflateRawSync(deflated, { chunkSize });
 
   console.log(`## deflated lorem_1mb.txt size: ${deflated.length}`);
@@ -54,7 +54,7 @@ import zlib from 'zlib';
       fn: () => myZlib.inflate(deflated),
     })
     .add('pako', {
-      fn: () => pako.inflateRaw(deflated, { chunkSize }),
+      fn: () => inflateRaw(deflated, { chunkSize }),
     })
     .add('native', {
       fn: () => zlib.inflateRawSync(deflated, { chunkSize }),
