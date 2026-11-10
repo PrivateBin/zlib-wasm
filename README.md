@@ -1,15 +1,16 @@
-# zlib-wasm-without-emscripten-sample
+# zlib-wasm
 
-A zlib WebAssembly binary build sample with [dcodeIO/webassembly](https://github.com/dcodeIO/webassembly).
+A zlib WebAssembly binary build with emscripten.
 
 ## Initialize and Build code
 
 ```
-$ git clone https://github.com/ukyo/zlib-wasm-without-emscripten-sample.git
-$ cd zlib-wasm-without-emsripten-sample
+$ git clone https://github.com/PrivateBin/zlib-wasm.git
+$ cd zlib-wasm
 $ npm install
 $ npm run build
-``` 
+$ npm test
+```
 
 ## Example
 
@@ -21,22 +22,25 @@ console.log(myZlib.inflate(deflated).equals(buffer));
 
 ## Benchmark
 
-* NodeJS: v8.9.1
-* OS: MacBook Pro
-* CPU: Intel Core i5 2.4GHz 
-* Memory: 16GB
+* NodeJS: v22.23.4
+* OS: Ubuntu 24.04.5 LTS
+* CPU: AMD Ryzen 5 3400G
+* Memory: 32GB
 
 ```
 $ npm run bench
 
+> zlib-wasm@1.4 bench
+> node benchmark/bench-1mbtxt.js
+
 ## lorem_1mb.txt size: 1000205
-wasm x 9.61 ops/sec ±4.48% (27 runs sampled)
-pako x 8.70 ops/sec ±2.26% (25 runs sampled)
-native x 15.21 ops/sec ±3.15% (41 runs sampled)
+wasm x 17.71 ops/sec ±0.61% (48 runs sampled)
+pako x 14.63 ops/sec ±2.68% (40 runs sampled)
+native x 35.20 ops/sec ±0.59% (61 runs sampled)
 Deflate: Fastest is native
-## deflated lorem_1mb.txt size: 257012
-wasm x 120 ops/sec ±10.26% (60 runs sampled)
-pako x 106 ops/sec ±8.56% (67 runs sampled)
-native x 211 ops/sec ±2.68% (74 runs sampled)
+## deflated lorem_1mb.txt size: 256560
+wasm x 254 ops/sec ±3.26% (73 runs sampled)
+pako x 202 ops/sec ±0.77% (85 runs sampled)
+native x 634 ops/sec ±2.05% (88 runs sampled)
 Inflate: Fastest is native
 ```
