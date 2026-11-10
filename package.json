@@ -11,7 +11,7 @@
   "author": "ukyo",
   "license": "MIT",
   "devDependencies": {
-    "ava": "^6.2.0",
+    "ava": "^8.4.0",
     "benchmark": "^2.1.4",
     "pako": "^3.0.3"
   }
